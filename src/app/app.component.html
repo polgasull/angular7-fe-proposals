@@ -1,17 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h2>
-    {{ title }}!
-  </h2>
 
-<div>
-  <a routerLink="/docs">Docs</a>
-</div> 
-<div>
-  <a routerLink="/proposals">Proposals</a>
+<app-navbar></app-navbar>
+<div class="container mt-4">
+  <router-outlet></router-outlet>
 </div>
-<div>
-  <a routerLink="/proposals/new">New</a>
-</div>
-
-<router-outlet></router-outlet>
