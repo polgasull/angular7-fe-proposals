@@ -1,11 +1,16 @@
-<p>
-  proposal-list works!
-</p>
+<div class="container">
+  <h1> Porposals </h1>
 
-<div *ngFor="let proposal of proposals">
-  <a routerLink="/proposal/{{proposal.id}}">
-    {{ proposal.id }} - {{ proposal.customer }}: {{ proposal.portfolio_url }}
-  </a> 
+  <div class="list-group">
+    <div *ngFor="let proposal of proposals" class="mb-3">
+      <a (click)="goToShow(proposal)" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ proposal.customer }}</h5>
+          <small>{{ proposal.weeks_to_complete }} weeks </small>
+        </div>
+        <p class="mb-1">{{ proposal.hourly_rate * proposal.estimated_hours | currency: 'EUR': true }} </p>
+        <small>{{ proposal.client_email }}</small>
+      </a>
+    </div>
+  </div>
 </div>
-
-<a routerLink="/">Back Home</a>

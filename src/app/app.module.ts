@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,9 @@ import { ProposalListComponent } from './components/proposal-list/proposal-list.
 import { ProposalNewComponent } from './components/proposal-new/proposal-new.component';
 import { ProposalShowComponent } from './components/proposal-show/proposal-show.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+
+import { DocumentService } from './services/document.service';
+import { ProposalService } from './services/proposal.service';
 
 @NgModule({
   declarations: [
@@ -26,9 +30,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DocumentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

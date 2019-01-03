@@ -1,18 +1,21 @@
-<h1 class="hideline">
-  {{ docTitle }}
-</h1>
+<div class="container">
+  <h1 class="hideline">
+        {{ docTitle }}
+  </h1>      
 
-<div class="card mb-3" *ngFor="let doc of documents">
-  <div class="crop">
-    <img src="{{ doc.image_url }}" class="card-img-top" alt="Doc image cap">
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">{{ doc.title }}</h5>
-    <p class="card-text"> {{ doc.description }} </p>
-    <div>
-      <a class="btn btn-lg btn-primary" href="{{ doc.file_url }}">Download file</a>
+  <div class="card mb-3" *ngFor="let doc of documents">
+    <div class="crop">
+      <img src="{{ doc.image_url }}" class="card-img-top" alt="Doc image cap">
     </div>
-    <p class="card-text"><small class="text-muted">Last updated {{ doc.updated_at }}</small></p>
+    <div class="card-body">
+      <h5 class="card-title">{{ doc.title }}</h5>
+      <p class="card-text"> {{ doc.description }} </p>
+      <div>
+        <a class="btn btn-lg btn-primary" href="{{ doc.file_url }}">Download file</a>
+      </div>
+      <p class="card-text text-right"><small class="text-muted">Last updated {{ doc.updated_at | date}}</small></p>
+    </div>
   </div>
 </div>
+
 

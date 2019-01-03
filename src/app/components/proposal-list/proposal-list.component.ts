@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Proposal } from '../../proposal';
+import { ProposalService } from '../../services/proposal.service';
 
 @Component({
   selector: 'app-proposal-list',
@@ -7,22 +9,26 @@ import { Proposal } from '../../proposal';
   styleUrls: ['./proposal-list.component.scss']
 })
 export class ProposalListComponent implements OnInit {
-  proposalOne: Proposal = new Proposal(15, 'ABC Company', 'http://portfolio.jordanhudgens.com', 'Ruby on Rails', 150,
-  120, 15, 'jordan@devcamp.com');
-  proposalTwo: Proposal = new Proposal(99, 'XDF Company', 'http://portfolio.jordanhudgens.com', 'Ruby on Rails', 150,
-  120, 15, 'jordan@devcamp.com');
-  proposalThree: Proposal = new Proposal(300, 'Some Company', 'http://portfolio.jordanhudgens.com', 'Ruby on Rails', 150,
-  120, 15, 'jordan@devcamp.com');
+  errorMessage: string;
+  proposals: Proposal[];
 
-  proposals: Proposal[] = [
-    this.proposalOne,
-    this.proposalTwo,
-    this.proposalThree
-  ];
-
-  constructor() { }
+  constructor(private proposalService: ProposalService, private router: Router) { }
 
   ngOnInit() {
+    this.getProposals();
+  }
+
+  getProposals() {
+    this.proposalService.getProposals()
+    .subscribe(
+      proposals => this.proposals = proposals,
+      error => this.errorMessage = <any>error
+    );
+  }
+
+  goToShow(proposal: Proposal) {
+    const link = ['/proposal', proposal.id];
+    this.router.navigate(link);
   }
 
 }

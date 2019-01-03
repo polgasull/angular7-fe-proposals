@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import { Proposal } from '../../proposal';
+import { ProposalService } from '../../services/proposal.service';
 
 @Component({
   selector: 'app-proposal-show',
@@ -8,17 +10,28 @@ import { Proposal } from '../../proposal';
   styleUrls: ['./proposal-show.component.scss']
 })
 export class ProposalShowComponent implements OnInit {
-  id: number;
-  routeId: any;
 
-  constructor(private route: ActivatedRoute) { }
+  proposal: Proposal;
+
+  constructor(
+    private route: ActivatedRoute,
+    private proposalService: ProposalService,
+  ) { }
+
+  @Input()
 
   ngOnInit() {
-    this.routeId = this.route.params.subscribe(
-      params => {
-        this.id = +params['id']; // the plus symbol converts the string to number
-      }
-    );
+    this.getProposal();
   }
 
+  getProposal() {
+    this.route.params.subscribe(params => {
+        if (params['id']) {
+            this.proposalService.showProposal(+params['id'])
+                .subscribe(
+                  proposal => this.proposal = proposal,
+                  );
+        }
+    });
+  }
 }

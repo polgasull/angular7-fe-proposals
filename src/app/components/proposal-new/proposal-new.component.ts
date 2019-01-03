@@ -9,7 +9,7 @@ import { Proposal } from '../../proposal';
 export class ProposalNewComponent implements OnInit {
   proposal = new Proposal;
   newProposalTitle = 'Create proposal';
-
+  submitted = false;
 
   constructor() { }
 
