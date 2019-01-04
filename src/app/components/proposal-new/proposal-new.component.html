@@ -57,6 +57,11 @@
             <input type="email" class="form-control mb-2" id="client_email" placeholder="roboto@email.com" name="client_email" #client_email="ngModel" [(ngModel)]="proposal.client_email">       
           </div>
           <button type="submit" class="btn btn-primary btn-lg" [disabled]="!proposalForm.form.valid" [hidden]="submitted"> Create Proposal </button>
+          <div [hidden]="!submitted" class="alert alert-success" role="alert"> 
+            <p> Your proposal has been successfully created. 
+              <a class="alert-link" routerLink="/proposals">View all</a>
+            </p>  
+          </div>
         </form>
       </div>
     </div>

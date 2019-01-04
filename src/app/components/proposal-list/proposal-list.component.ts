@@ -9,6 +9,7 @@ import { ProposalService } from '../../services/proposal.service';
   styleUrls: ['./proposal-list.component.scss']
 })
 export class ProposalListComponent implements OnInit {
+  title: "Proposals"
   errorMessage: string;
   proposals: Proposal[];
 
