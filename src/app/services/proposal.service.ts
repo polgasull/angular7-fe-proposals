@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -26,6 +26,17 @@ export class ProposalService {
 
   showProposal(id: number) {
     return this.http.get(`${this.proposal_url}/proposals/${id}`)
+    .pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
+  }
+
+  createProposal(proposal) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+      });
+    return this.http.post(`${this.proposal_url}/proposals`, JSON.stringify(proposal), {headers: headers })
     .pipe(
       retry(3),
       catchError(this.handleError)

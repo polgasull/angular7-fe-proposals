@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+import { ProposalService } from '../../services/proposal.service';
 import { Proposal } from '../../proposal';
 
 @Component({
@@ -11,9 +13,20 @@ export class ProposalNewComponent implements OnInit {
   newProposalTitle = 'Create proposal';
   submitted = false;
 
-  constructor() { }
+  constructor(
+    private proposalService: ProposalService
+  ) { }
 
   ngOnInit() {
+  }
+
+  createProposal() {
+    this.submitted = true;
+    this.proposalService.createProposal(this.proposal)
+      .subscribe(
+        data => true,
+        error => console.log('Error saving proposal')
+        );
   }
 
 }
